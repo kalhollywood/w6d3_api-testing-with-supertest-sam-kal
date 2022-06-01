@@ -67,9 +67,9 @@ test("Has the structure { copiesSold: any number, title: any string }", function
  *
  * The test has been partially written for you, but you'll need to complete it.
  */
-test("Has the structure { success: true, payload: { hasAuthenticated: true, isAdmin: false, userId: any number } }", function () {
+test("Has the structure { success: true, payload: { hasAuthenticated: true, isAdmin: false, userId: any number } }", async function () {
   async function getAuthentication() {
-    return {
+    return await {
       success: true,
       payload: {
         hasAuthenticated: true,
@@ -78,6 +78,14 @@ test("Has the structure { success: true, payload: { hasAuthenticated: true, isAd
       },
     };
   }
+  expect({
+    success: true,
+    payload: {
+      hasAuthenticated: true,
+      isAdmin: false,
+      userId: 125095,
+    },
+  }).toMatchObject(getAuthentication());
 });
 
 /**
