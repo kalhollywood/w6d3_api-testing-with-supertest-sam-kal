@@ -19,6 +19,11 @@ test("Has the structure { success: true }", function () {
   const actual = {
     success: true,
   };
+  const expected = {
+    success: true,
+  };
+
+  expect(actual).toStrictEqual(expected);
 });
 
 /**
@@ -38,6 +43,12 @@ test("Has the structure { copiesSold: any number, title: any string }", function
     copiesSold: 5014,
     title: "THE LIGHTHOUSE (1984)",
   };
+
+  const expected = {
+    copiesSold: expect.any(Number),
+    title: expect.any(String),
+  };
+  expect(actual).toStrictEqual(expected);
 });
 
 /**
