@@ -66,8 +66,8 @@ test("Has the structure { copiesSold: any number, title: any string }", function
  * Since `getAuthentication` is asynchronous, you may need to read up on how to write an asynchronous test in Jest: https://jestjs.io/docs/asynchronous
  *
  * The test has been partially written for you, but you'll need to complete it.
- */
-test("Has the structure { success: true, payload: { hasAuthenticated: true, isAdmin: false, userId: any number } }", async function () {
+ * 
+ * test("Has the structure { success: true, payload: { hasAuthenticated: true, isAdmin: false, userId: any number } }", async function () {
   async function getAuthentication() {
     return await {
       success: true,
@@ -87,6 +87,27 @@ test("Has the structure { success: true, payload: { hasAuthenticated: true, isAd
     },
   }).toMatchObject(getAuthentication());
 });
+ */
+test("Has the structure { success: true, payload: { hasAuthenticated: true, isAdmin: false, userId: any number } }", async function () {
+  async function getAuthentication() {
+    return {
+      success: true,
+      payload: {
+        hasAuthenticated: true,
+        isAdmin: false,
+        userId: 125095,
+      },
+    };
+  }
+  expect(await getAuthentication()).toMatchObject({
+    success: true,
+    payload: {
+      hasAuthenticated: true,
+      isAdmin: false,
+      userId: expect.any(Number),
+    },
+  });
+});
 
 /**
  * Write a test that checks whether the asynchronous function `getUsernames`, when called, resolves to an object that has the following structure:
@@ -102,14 +123,26 @@ test("Has the structure { success: true, payload: { hasAuthenticated: true, isAd
  *
  * This time the test has not been written for you, you'll need to write it from scratch.
  */
-async function getUsernames() {
-  return {
+
+test(`getUsernames has structure of { success: true, payload: an array of objects with the structure { username: any string }}`, async () => {
+  async function getUsernames() {
+    return {
+      success: true,
+      payload: [
+        { username: "A" },
+        { username: "B" },
+        { username: "C" },
+        { username: "D" },
+      ],
+    };
+  }
+  expect(await getUsernames()).toMatchObject({
     success: true,
     payload: [
-      { username: "A" },
-      { username: "B" },
-      { username: "C" },
-      { username: "D" },
+      { username: expect.any(String) },
+      { username: expect.any(String) },
+      { username: expect.any(String) },
+      { username: expect.any(String) },
     ],
-  };
-}
+  });
+});
