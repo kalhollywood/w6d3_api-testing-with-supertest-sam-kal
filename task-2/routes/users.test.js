@@ -54,3 +54,18 @@ describe("GET /users/4", function () {
     console.log(response.body.payload);
   });
 });
+
+// TASK 2.5
+
+describe("GET /users/99", function () {
+  test("responds with 404 error and message", async function getUserById() {
+    const response = await request(app).get("/users/99");
+    expect(response.statusCode).toBe(404);
+    console.log(response.statusCode);
+    console.log(response.body);
+    expect(response.body).toMatchObject({
+      success: false,
+      reason: "No user with ID 99 was found.",
+    });
+  });
+});
